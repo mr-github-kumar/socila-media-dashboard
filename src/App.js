@@ -1,25 +1,34 @@
+
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Main from './components/Main';
 import Overview from './components/Overview';
 
 function App() {
+
+  const [isActive, setActive] = useState(true);
+
+  const changeTheme = () => {
+      setActive(!isActive);
+    }    
+   
+
   return (
-    <section className="App w-full h-screen bg-darkestBlue flex justify-center items-start font-body relative">
-      <section className="absolute w-full h-full grid grid-rows-two">
-        <div className="h-full bg-darkBlue rounded-3xl rounded-t-none"></div>
-        <div className="h-full"></div>
-      </section>
-      <section className="main flex flex-col p-4 gap-6 z-10">        
-        <section className="app-header h-auto">
-          <Header/>
+    <section className={isActive?'dark':''}>
+      <section className="w-screen h-full sm:h-screen bg-white dark:bg-darkestBlue flex sm:justify-center sm:items-start font-body relative">
+        <div className="sm:absolute sm:h-1/4 w-full bg-paleBlue dark:bg-darkBlue rounded-3xl rounded-t-none hidden sm:block"></div>
+        <section className="main w-full sm:h-full flex flex-col gap-6 p-4 z-10 items-center max-w-4xl">        
+          <section className="app-header">
+            <Header action={changeTheme}/>
+          </section>
+          <section className="app-main">
+            <Main/>
+          </section>
+          <section className="app-overview">
+            <Overview/>
+          </section>        
         </section>
-        <section className="app-main h-auto">
-          <Main/>
-        </section>
-        <section className="app-overview h-auto">
-        <Overview/>
-      </section>        
       </section>
     </section>
   );
